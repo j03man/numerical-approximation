@@ -1,0 +1,33 @@
+
+// simple monte carlo area calculation
+#include <iostream>
+#include <stdio.h>      
+#include <math.h> 
+using namespace std;
+
+int main() {
+    srand(time(0));//seeds the random number table with the time
+    double inarea=0;
+    int outarea;
+    int i=0;
+    int k;
+    double x;
+    double y;
+    double r;
+    cout.precision(15); //the default precision displays only 6 digits total
+    while(i<100000000){
+        //RAND_MAX is the maximum value of a random number so all random values divided by max will be between 0 and 1
+        x=((double)rand()) / RAND_MAX;
+        y=((double)rand()) / RAND_MAX;
+    //cout<<"x="<<x<<endl;
+    //cout<<"y="<<y<<endl;
+    //cout<<sqrt(pow(x,2)+pow(y,2))<<endl;
+    //define the area inside the shape: circle radius 1
+    if(sqrt(pow(x,2)+pow(y,2))<1){inarea=inarea+1;}//increments the count for random points inside the quarter of the circle between 0 and 1 for x and y only works this cleanly because of the circle is symmetrical about all axis
+    
+    i++;
+    }
+    cout<<"area inside a circle radius 1 is "<<4*inarea/i;
+    //calculate error for monte carlo
+    return 0;
+}
