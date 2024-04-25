@@ -1,0 +1,48 @@
+#include <iostream>
+#include <stdio.h>      
+#include <math.h> 
+using namespace std;
+int main() {
+    // 11054.2x=5832.8x^5-15586x^4+13816x^3-6464.6x^2+12556x+197.62
+    long double y1=1;
+    long double y2=0;
+    long double x=0;
+    long double stepsize=1.2;
+    int i=1;//number of times the while loop has incremented
+    int j;//used to mark whether the intercept has been passed
+    int k=0;//keeps track of the number of times stepsize is reduced
+    cout.precision(15); //the default precision displays only 6 digits total
+    while(abs(y1-y2)>.00000001){
+        
+        y1=11054.2*x;
+        //y1=8145.1*.95*x;
+        cout<<y1<<endl;
+        y2=5832.8*pow(x,5)-15586*pow(x,4)+13816*pow(x,3)-6464.6*pow(x,2)+12556*x+197.62;
+        //y2=2950.7*pow(x,5)-7860.5*pow(x,4)+6743.9*pow(x,3)-3240*pow(x,2)+8898.5*x+170.12;
+        cout<<y2<<endl;
+        cout<<abs(y1-y2)<<endl;
+        if(y1<y2){
+            
+            x=x+stepsize;
+            //checks that guess and check has passed the intersect before reducing stepsize
+            if(j==2){
+                stepsize=stepsize/4; 
+                k++;}
+            j=1;
+        }else if(y1>y2){
+            
+            x=x-stepsize;
+            
+            if(j==1){
+                stepsize=stepsize/4; 
+                k++;}
+            j=2;
+        }
+        cout<<"step "<<stepsize<<endl;
+        i++;
+    }
+    
+    cout << "x= "<<x<<"    y1= "<<y1<<"    y2= "<<y2<<"   stepsize= "<<stepsize<<endl<<i<<endl<<k;
+    
+    return 0;
+}
